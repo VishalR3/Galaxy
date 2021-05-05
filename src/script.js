@@ -56,7 +56,7 @@ const parameters = {};
 parameters.count = 100000;
 parameters.size = 0.01;
 parameters.radius = 5;
-parameters.branches = 3;
+parameters.branches = 5;
 parameters.spin = 1;
 parameters.randomness = 0.2;
 parameters.randomnessPower = 3;
@@ -182,6 +182,7 @@ const camera = new THREE.PerspectiveCamera(
   0.1,
   100
 );
+camera.position.y = 3;
 camera.position.z = 3;
 scene.add(camera);
 
