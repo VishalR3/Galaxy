@@ -40,7 +40,7 @@ window.addEventListener("resize", () => {
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 });
 
-window.addEventListener("dblclick", () => {
+canvas.addEventListener("dblclick", () => {
   const fullscreenElement =
     document.fullscreenElement || document.webkitFullscreenElement;
   if (!fullscreenElement) {
@@ -58,10 +58,11 @@ parameters.size = 0.01;
 parameters.radius = 5;
 parameters.branches = 5;
 parameters.spin = 1;
-parameters.randomness = 0.2;
+parameters.randomness = 0.3;
 parameters.randomnessPower = 3;
 parameters.insideColor = "#ff6030";
 parameters.outsideColor = "#1b3984";
+parameters.animate = true;
 
 let geometry = null;
 let material = null;
@@ -172,6 +173,7 @@ gui
   .max(10)
   .step(1)
   .onFinishChange(generateGalaxy);
+gui.add(parameters, "animate");
 gui.addColor(parameters, "insideColor").onFinishChange(generateGalaxy);
 gui.addColor(parameters, "outsideColor").onFinishChange(generateGalaxy);
 
@@ -205,6 +207,9 @@ const clock = new THREE.Clock();
 const tick = () => {
   //Clock
   const elapsedTime = clock.getElapsedTime();
+  if (parameters.animate) {
+    points.rotation.y += 0.001;
+  }
 
   //Update Controls
   controls.update();
